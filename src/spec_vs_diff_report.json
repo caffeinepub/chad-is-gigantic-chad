@@ -1,0 +1,61 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-06T16:37:43.344Z",
+  "summary": "Diff adds new Frogger/Galaga/Minesweeper React pages and routes, updates Home and Leaderboard to include the new games and derives leaderboard tabs from backend getAvailableGames, and extends the Motoko backend with new per-game score maps plus an upgrade migration module. However, the required new preview image assets are not shown as added, and there are unrelated frontend theme/auth changes not requested.",
+  "missing_requirements": [
+    {
+      "id": "REQ-5",
+      "requirement": "Add preview images for Frogger, Galaga, and Minesweeper under frontend/public/assets/generated with filenames frogger-preview.dim_300x200.png, galaga-preview.dim_300x200.png, minesweeper-preview.dim_300x200.png.",
+      "reason": "HomePage references these /assets/generated/* files, but the diff summary does not show any new static assets added under frontend/public/assets/generated, so the required images are not evidenced as present.",
+      "evidence": [
+        "frontend/src/pages/HomePage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Backend getGameScores() must include cases for Frogger, Galaga, and Minesweeper; getHighScores() must not trap for these games; submitScore() must persist only the player's best score (replace only when higher).",
+      "reason": "backend/main.mo is truncated before the implementations of submitScore() and the internal getGameScores() (or equivalent) switch/dispatch logic, so the diff summary does not provide evidence that the new game cases are handled without trapping and that 'best score only' replacement logic is preserved for the new games.",
+      "evidence": [
+        "backend/main.mo (truncated)"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Internet Identity hook/provider behavior changes and related auth-client configuration updates.",
+      "reason": "The BuildRequest explicitly lists third-party auth providers as a non-goal and does not request any Internet Identity behavior changes; these modifications appear unrelated to adding games and leaderboard wiring.",
+      "evidence": [
+        "frontend/src/hooks/useInternetIdentity.ts"
+      ]
+    },
+    {
+      "description": "Global styling/theme changes (retro palette updates) via index.css and Tailwind config adjustments.",
+      "reason": "The BuildRequest does not request any global theme restyling; changes to index.css and tailwind.config.js are outside the stated requirements for adding games, routing, leaderboard derivation, and preview assets.",
+      "evidence": [
+        "frontend-file-summaries.txt (mentions frontend/src/index.css, frontend/tailwind.config.js)"
+      ]
+    },
+    {
+      "description": "Adding/updating project_state.json tracking entries for new feature requests (AR-1..AR-6).",
+      "reason": "The BuildRequest does not mention updating any project tracking metadata file; this is additional functionality/artifact not requested.",
+      "evidence": [
+        "project_state.json"
+      ]
+    }
+  ],
+  "confidence": 0.72,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/App.tsx",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/pages/FroggerGame.tsx",
+    "frontend/src/pages/GalagaGame.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/LeaderboardPage.tsx",
+    "frontend/src/pages/MinesweeperGame.tsx",
+    "project_state.json"
+  ]
+}

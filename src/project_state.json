@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "New project",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Retro pixel-art Frogger scene preview (frogger-preview.dim_300x200.png)\n- Retro pixel-art Galaga space shooter preview (galaga-preview.dim_300x200.png)\n- Retro pixel-art Minesweeper grid preview (minesweeper-preview.dim_300x200.png)",
+  "existing_features": [
+    {
+      "id": "feature-add-three-additional-classic-games-to-the-app-frogger-galaga-and-minesweeper-each-with-a-dedicated-playable-game-page-implemented-in-react-typescript-and-consistent-ui-ux-patterns-header-back-button-score-panel-how-to-play-panel-pause-reset-controls-where-applicable-and-end-of-game-score-submission-dialog",
+      "title": "Add three additional classic games to the app: Frogger, Galaga, and Minesweeper, each with a dedicated playable game page implemented in React/TypeScript and consistent UI/UX patterns (header back button, score panel, how-to-play panel, pause/reset controls where applicable, and end-of-game score submission dialog).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-frontend-routing-and-navigation-wiring-so-the-new-game-pages-are-reachable-from-the-home-game-grid-and-from-the-leaderboard-page-including-deep-linking-to-the-leaderboard-with-a-selected-game",
+      "title": "Update the frontend routing and navigation wiring so the new game pages are reachable from the home game grid and from the leaderboard page (including deep-linking to the leaderboard with a selected game).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-leaderboard-game-list-derive-from-the-backend-s-available-games-getavailablegames-instead-of-a-hard-coded-constant-so-newly-added-games-automatically-appear-as-tabs-without-additional-code-changes",
+      "title": "Make the Leaderboard game list derive from the backend’s available games (getAvailableGames) instead of a hard-coded constant, so newly added games automatically appear as tabs without additional code changes.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-preview-images-for-the-new-games-as-static-assets-and-render-them-on-the-home-page-game-cards-using-the-existing-assets-generated-preview-image-convention",
+      "title": "Add preview images for the new games as static assets and render them on the Home page game cards using the existing /assets/generated/* preview image convention.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Add more classic games to the app",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Extend the Motoko backend to recognize the new games (Frogger, Galaga, Minesweeper) in getAvailableGames() and to store/retrieve high scores for each via getHighScores(), getPlayerScore(), and submitScore() without trapping for these games.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Add more classic games to Retro Arcade",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

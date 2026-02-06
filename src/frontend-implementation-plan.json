@@ -1,0 +1,108 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Retro Arcade: Add Frogger, Galaga, and Minesweeper with routing, leaderboard integration, and previews",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement three new classic game pages (Frogger, Galaga, Minesweeper) with consistent UI/UX patterns and score submission dialog using the existing React Query mutation flow.",
+      "acceptanceCriteria": [
+        "There are new routes/pages for Frogger, Galaga, and Minesweeper that render and run without runtime errors.",
+        "Each new game has a scoring system and triggers a game-over (or win/lose) state that opens a name-entry dialog to submit the score.",
+        "Submitting a score uses the existing score submission flow (React Query mutation) and shows success/error toast feedback consistent with existing games.",
+        "All user-facing text on the new pages is in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/FroggerGame.tsx",
+          "operation": "create",
+          "description": "Create a dedicated Frogger playable page (React/TypeScript) following existing game-page UI patterns: header back button, score panel, how-to-play panel, pause/reset controls where applicable, and an end-of-game score submission dialog using useSubmitScore with sonner toast feedback. Use existing shadcn/ui components (Card, Button, Dialog, Input, Label) to match the app’s UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/GalagaGame.tsx",
+          "operation": "create",
+          "description": "Create a dedicated Galaga playable page (React/TypeScript) following existing game-page UI patterns: header back button, score panel, how-to-play panel, pause/reset controls where applicable, and an end-of-game score submission dialog using useSubmitScore with sonner toast feedback. Use existing shadcn/ui components (Card, Button, Dialog, Input, Label) to match the app’s UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/MinesweeperGame.tsx",
+          "operation": "create",
+          "description": "Create a dedicated Minesweeper playable page (React/TypeScript) following existing game-page UI patterns: header back button, score panel, how-to-play panel, pause/reset controls where applicable, and an end-of-game (win/lose) score submission dialog using useSubmitScore with sonner toast feedback. Use existing shadcn/ui components (Card, Button, Dialog, Input, Label) to match the app’s UI. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Wire new game pages into routing and navigation so Frogger, Galaga, and Minesweeper are reachable from the Home game grid and from the Leaderboard page, including leaderboard deep-linking with a selected game.",
+      "acceptanceCriteria": [
+        "frontend/src/App.tsx includes routes for Frogger, Galaga, and Minesweeper.",
+        "frontend/src/pages/HomePage.tsx includes route mappings for Frogger, Galaga, and Minesweeper so 'Play Now' navigates correctly.",
+        "frontend/src/pages/LeaderboardPage.tsx allows selecting Frogger, Galaga, and Minesweeper and the 'Play {game}' button navigates to the correct route.",
+        "Leaderboard deep-linking via /leaderboard?game=<GameName> works for the new games."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register new routes for Frogger, Galaga, and Minesweeper and wire them into the existing TanStack Router route tree so the pages are navigable."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Extend the Home page route mapping to include Frogger, Galaga, and Minesweeper so each new game card’s 'Play Now' navigation resolves to the correct path."
+        },
+        {
+          "path": "frontend/src/pages/LeaderboardPage.tsx",
+          "operation": "modify",
+          "description": "Update leaderboard navigation wiring to support Frogger, Galaga, and Minesweeper selection and ensure the 'Play {game}' button routes correctly. Also ensure selected game can be deep-linked and synchronized via the /leaderboard?game=<GameName> search param."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Generate Leaderboard game tabs dynamically from the backend’s available games list instead of a hard-coded constant, keeping top-10 fetch behavior intact.",
+      "acceptanceCriteria": [
+        "Leaderboard tabs are generated from the fetched available games list.",
+        "If the backend returns additional games in the future, they automatically show up as leaderboard tabs.",
+        "When switching tabs, the leaderboard fetches and displays the top scores for that selected game (still capped to top 10 by the existing query logic)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/LeaderboardPage.tsx",
+          "operation": "modify",
+          "description": "Replace the hard-coded game list with data from useGetAvailableGames, rendering Tabs/TabsTrigger/TabsContent based on the fetched list. Keep the existing useGetHighScores(selectedGame) top-10 behavior, and keep selectedGame state synchronized with the search param for deep-linking. Use existing shadcn/ui Tabs components for the tab UI. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Add static preview images for Frogger, Galaga, and Minesweeper under the generated assets convention and render them on Home page game cards.",
+      "acceptanceCriteria": [
+        "New preview images exist under frontend/public/assets/generated with the required filenames.",
+        "Home page game cards for Frogger, Galaga, and Minesweeper display the correct preview image and do not render broken images.",
+        "No preview images are served from or routed through the backend."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/frogger-preview.dim_300x200.png",
+          "operation": "create",
+          "description": "Add the generated static preview image asset for Frogger at frontend/public/assets/generated/frogger-preview.dim_300x200.png."
+        },
+        {
+          "path": "frontend/public/assets/generated/galaga-preview.dim_300x200.png",
+          "operation": "create",
+          "description": "Add the generated static preview image asset for Galaga at frontend/public/assets/generated/galaga-preview.dim_300x200.png."
+        },
+        {
+          "path": "frontend/public/assets/generated/minesweeper-preview.dim_300x200.png",
+          "operation": "create",
+          "description": "Add the generated static preview image asset for Minesweeper at frontend/public/assets/generated/minesweeper-preview.dim_300x200.png."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Extend the Home page gameImages mapping to include Frogger, Galaga, and Minesweeper preview images using the static asset convention paths: frontend/public/assets/generated/frogger-preview.dim_300x200.png, frontend/public/assets/generated/galaga-preview.dim_300x200.png, frontend/public/assets/generated/minesweeper-preview.dim_300x200.png."
+        }
+      ]
+    }
+  ]
+}

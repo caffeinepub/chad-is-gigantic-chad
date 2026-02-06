@@ -1,0 +1,110 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-06T16:37:43.347Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 5,
+    "implemented": 4,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Add three additional classic games to the app: Frogger, Galaga, and Minesweeper, each with a dedicated playable game page implemented in React/TypeScript and consistent UI/UX patterns (header back button, score panel, how-to-play panel, pause/reset controls where applicable, and end-of-game score submission dialog).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/FroggerGame.tsx",
+          "frontend/src/pages/GalagaGame.tsx",
+          "frontend/src/pages/MinesweeperGame.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/FroggerGame.tsx",
+          "frontend/src/pages/GalagaGame.tsx",
+          "frontend/src/pages/MinesweeperGame.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Extend the Motoko backend to recognize the new games (Frogger, Galaga, Minesweeper) in getAvailableGames() and to store/retrieve high scores for each via getHighScores(), getPlayerScore(), and submitScore() without trapping for these games.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Update the frontend routing and navigation wiring so the new game pages are reachable from the home game grid and from the leaderboard page (including deep-linking to the leaderboard with a selected game).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/LeaderboardPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/LeaderboardPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Make the Leaderboard game list derive from the backend’s available games (getAvailableGames) instead of a hard-coded constant, so newly added games automatically appear as tabs without additional code changes.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/LeaderboardPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/LeaderboardPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Add preview images for the new games as static assets and render them on the Home page game cards using the existing /assets/generated/* preview image convention.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/public/assets/generated/frogger-preview.dim_300x200.png",
+          "frontend/public/assets/generated/galaga-preview.dim_300x200.png",
+          "frontend/public/assets/generated/minesweeper-preview.dim_300x200.png",
+          "frontend/src/pages/HomePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/public/assets/generated/frogger-preview.dim_300x200.png",
+          "frontend/public/assets/generated/galaga-preview.dim_300x200.png",
+          "frontend/public/assets/generated/minesweeper-preview.dim_300x200.png",
+          "frontend/src/pages/HomePage.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "build-template/Dockerfile",
+    "build-template/LICENSE",
+    "build-template/README.md",
+    "build-template/deploy.sh",
+    "build-template/icp.yaml",
+    "build-template/src/backend/canister.yaml",
+    "build-template/src/frontend/canister.yaml",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/public/assets/generated/frogger-preview.dim_300x200.png",
+    "frontend/public/assets/generated/galaga-preview.dim_300x200.png",
+    "frontend/public/assets/generated/minesweeper-preview.dim_300x200.png",
+    "frontend/src/App.tsx",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/pages/FroggerGame.tsx",
+    "frontend/src/pages/GalagaGame.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/LeaderboardPage.tsx",
+    "frontend/src/pages/MinesweeperGame.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

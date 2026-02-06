@@ -1,0 +1,128 @@
+{
+  "kind": "build_request",
+  "title": "Add more classic games to Retro Arcade",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Add three additional classic games to the app: Frogger, Galaga, and Minesweeper, each with a dedicated playable game page implemented in React/TypeScript and consistent UI/UX patterns (header back button, score panel, how-to-play panel, pause/reset controls where applicable, and end-of-game score submission dialog).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-14"
+        ],
+        "quotes": [
+          "Can you add more classic games"
+        ]
+      },
+      "acceptanceCriteria": [
+        "There are new routes/pages for Frogger, Galaga, and Minesweeper that render and run without runtime errors.",
+        "Each new game has a scoring system and triggers a game-over (or win/lose) state that opens a name-entry dialog to submit the score.",
+        "Submitting a score uses the existing score submission flow (React Query mutation) and shows success/error toast feedback consistent with existing games.",
+        "All user-facing text on the new pages is in English."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Extend the Motoko backend to recognize the new games (Frogger, Galaga, Minesweeper) in getAvailableGames() and to store/retrieve high scores for each via getHighScores(), getPlayerScore(), and submitScore() without trapping for these games.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-14"
+        ],
+        "quotes": [
+          "Can you add more classic games"
+        ]
+      },
+      "acceptanceCriteria": [
+        "backend/main.mo includes the three new games in the available games list with name/description/thumbnail fields.",
+        "backend/main.mo has per-game score maps and getGameScores() cases for Frogger, Galaga, and Minesweeper.",
+        "Calling getHighScores('Frogger'|'Galaga'|'Minesweeper') returns an array and does not trap.",
+        "Submitting a score for each new game persists the player’s best score (only replaces when the new score is higher), consistent with existing behavior."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Update the frontend routing and navigation wiring so the new game pages are reachable from the home game grid and from the leaderboard page (including deep-linking to the leaderboard with a selected game).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-14"
+        ],
+        "quotes": [
+          "Can you add more classic games"
+        ]
+      },
+      "acceptanceCriteria": [
+        "frontend/src/App.tsx includes routes for Frogger, Galaga, and Minesweeper.",
+        "frontend/src/pages/HomePage.tsx includes route mappings for Frogger, Galaga, and Minesweeper so 'Play Now' navigates correctly.",
+        "frontend/src/pages/LeaderboardPage.tsx allows selecting Frogger, Galaga, and Minesweeper and the 'Play {game}' button navigates to the correct route.",
+        "Leaderboard deep-linking via /leaderboard?game=<GameName> works for the new games."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Make the Leaderboard game list derive from the backend’s available games (getAvailableGames) instead of a hard-coded constant, so newly added games automatically appear as tabs without additional code changes.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-14"
+        ],
+        "quotes": [
+          "Can you add more classic games"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Leaderboard tabs are generated from the fetched available games list.",
+        "If the backend returns additional games in the future, they automatically show up as leaderboard tabs.",
+        "When switching tabs, the leaderboard fetches and displays the top scores for that selected game (still capped to top 10 by the existing query logic)."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add preview images for the new games as static assets and render them on the Home page game cards using the existing /assets/generated/* preview image convention.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-14"
+        ],
+        "quotes": [
+          "Can you add more classic games"
+        ]
+      },
+      "acceptanceCriteria": [
+        "New preview images exist under frontend/public/assets/generated with the required filenames.",
+        "Home page game cards for Frogger, Galaga, and Minesweeper display the correct preview image and do not render broken images.",
+        "No preview images are served from or routed through the backend."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor in backend/main.mo; only add backend/migration.mo if an upgrade-safe state migration is strictly required.",
+    "Do not edit files under frontend/src/components/ui or any other frontend immutable paths listed in SYSTEM_CONTEXT; compose existing UI components instead.",
+    "Use English for all user-facing strings added/changed by this request."
+  ],
+  "nonGoals": [
+    "Adding multiplayer, real-time gameplay, or chat features.",
+    "Adding third-party authentication providers (only Internet Identity is supported).",
+    "Adding external databases or external backend services."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Retro pixel-art Frogger scene preview (frogger-preview.dim_300x200.png)",
+      "Retro pixel-art Galaga space shooter preview (galaga-preview.dim_300x200.png)",
+      "Retro pixel-art Minesweeper grid preview (minesweeper-preview.dim_300x200.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

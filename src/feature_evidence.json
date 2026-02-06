@@ -1,0 +1,81 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-three-additional-classic-games-to-the-app-frogger-galaga-and-minesweeper-each-with-a-dedicated-playable-game-page-implemented-in-react-typescript-and-consistent-ui-ux-patterns-header-back-button-score-panel-how-to-play-panel-pause-reset-controls-where-applicable-and-end-of-game-score-submission-dialog",
+      "featureTitle": "Add three additional classic games to the app: Frogger, Galaga, and Minesweeper, each with a dedicated playable game page implemented in React/TypeScript and consistent UI/UX patterns (header back button, score panel, how-to-play panel, pause/reset controls where applicable, and end-of-game score submission dialog).",
+      "files": [
+        "frontend/src/pages/FroggerGame.tsx",
+        "frontend/src/pages/GalagaGame.tsx",
+        "frontend/src/pages/MinesweeperGame.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-frontend-routing-and-navigation-wiring-so-the-new-game-pages-are-reachable-from-the-home-game-grid-and-from-the-leaderboard-page-including-deep-linking-to-the-leaderboard-with-a-selected-game",
+      "featureTitle": "Update the frontend routing and navigation wiring so the new game pages are reachable from the home game grid and from the leaderboard page (including deep-linking to the leaderboard with a selected game).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/HomePage.tsx",
+        "frontend/src/pages/LeaderboardPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-make-the-leaderboard-game-list-derive-from-the-backend-s-available-games-getavailablegames-instead-of-a-hard-coded-constant-so-newly-added-games-automatically-appear-as-tabs-without-additional-code-changes",
+      "featureTitle": "Make the Leaderboard game list derive from the backend’s available games (getAvailableGames) instead of a hard-coded constant, so newly added games automatically appear as tabs without additional code changes.",
+      "files": [
+        "frontend/src/pages/LeaderboardPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-preview-images-for-the-new-games-as-static-assets-and-render-them-on-the-home-page-game-cards-using-the-existing-assets-generated-preview-image-convention",
+      "featureTitle": "Add preview images for the new games as static assets and render them on the Home page game cards using the existing /assets/generated/* preview image convention.",
+      "files": [
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
