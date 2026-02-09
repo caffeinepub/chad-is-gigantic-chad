@@ -1,40 +1,46 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T16:37:43.347Z",
+  "generatedAt": "2026-02-09T19:16:04.130Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
     "total": 5,
-    "implemented": 4,
+    "implemented": 3,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Add three additional classic games to the app: Frogger, Galaga, and Minesweeper, each with a dedicated playable game page implemented in React/TypeScript and consistent UI/UX patterns (header back button, score panel, how-to-play panel, pause/reset controls where applicable, and end-of-game score submission dialog).",
+        "summary": "Add six additional classic games to the arcade, each with a dedicated playable React/TypeScript game page that matches the existing UI/UX patterns used by current games (header back button, score panel, how-to-play panel, pause/reset controls where applicable, and an end-of-game score submission dialog that submits scores to the backend). The six games to add are: Centipede, Missile Command, Pinball, Bubble Shooter, Q*bert, and Dig Dug.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/FroggerGame.tsx",
-          "frontend/src/pages/GalagaGame.tsx",
-          "frontend/src/pages/MinesweeperGame.tsx"
+          "frontend/src/pages/CentipedeGame.tsx",
+          "frontend/src/pages/MissileCommandGame.tsx",
+          "frontend/src/pages/PinballGame.tsx",
+          "frontend/src/pages/BubbleShooterGame.tsx",
+          "frontend/src/pages/QbertGame.tsx",
+          "frontend/src/pages/DigDugGame.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/FroggerGame.tsx",
-          "frontend/src/pages/GalagaGame.tsx",
-          "frontend/src/pages/MinesweeperGame.tsx"
+          "frontend/src/pages/CentipedeGame.tsx",
+          "frontend/src/pages/MissileCommandGame.tsx",
+          "frontend/src/pages/PinballGame.tsx",
+          "frontend/src/pages/BubbleShooterGame.tsx",
+          "frontend/src/pages/QbertGame.tsx",
+          "frontend/src/pages/DigDugGame.tsx"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Extend the Motoko backend to recognize the new games (Frogger, Galaga, Minesweeper) in getAvailableGames() and to store/retrieve high scores for each via getHighScores(), getPlayerScore(), and submitScore() without trapping for these games.",
+        "summary": "Extend the Motoko backend (single actor in backend/main.mo) to recognize the six new games (Centipede, Missile Command, Pinball, Bubble Shooter, Q*bert, Dig Dug) in getAvailableGames(), and to store/retrieve high scores for each via getHighScores(), getPlayerScore(), and submitScore() without trapping or returning an empty non-persistent map for these game names.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
       },
       {
         "id": "REQ-3",
-        "summary": "Update the frontend routing and navigation wiring so the new game pages are reachable from the home game grid and from the leaderboard page (including deep-linking to the leaderboard with a selected game).",
+        "summary": "Update frontend routing and navigation so the six new games are reachable from the app: add routes in frontend/src/App.tsx, add Home page card navigation mappings (route + preview image mappings) in frontend/src/pages/HomePage.tsx, and update Leaderboard navigation mapping in frontend/src/pages/LeaderboardPage.tsx so the \"Play {game.name}\" button works for all available games including the six newly-added games.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/App.tsx",
@@ -49,31 +55,33 @@
       },
       {
         "id": "REQ-4",
-        "summary": "Make the Leaderboard game list derive from the backend’s available games (getAvailableGames) instead of a hard-coded constant, so newly added games automatically appear as tabs without additional code changes.",
+        "summary": "Add static preview images for the six new games under frontend/public/assets/generated using the existing preview image convention, and render them on the Home page game cards via the existing gameImages mapping.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/LeaderboardPage.tsx"
+          "frontend/public/assets/generated/centipede-preview.dim_300x200.png",
+          "frontend/public/assets/generated/missile-command-preview.dim_300x200.png",
+          "frontend/public/assets/generated/pinball-preview.dim_300x200.png",
+          "frontend/public/assets/generated/bubble-shooter-preview.dim_300x200.png",
+          "frontend/public/assets/generated/qbert-preview.dim_300x200.png",
+          "frontend/public/assets/generated/dig-dug-preview.dim_300x200.png",
+          "frontend/src/pages/HomePage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/LeaderboardPage.tsx"
+          "frontend/public/assets/generated/centipede-preview.dim_300x200.png",
+          "frontend/public/assets/generated/missile-command-preview.dim_300x200.png",
+          "frontend/public/assets/generated/pinball-preview.dim_300x200.png",
+          "frontend/public/assets/generated/bubble-shooter-preview.dim_300x200.png",
+          "frontend/public/assets/generated/qbert-preview.dim_300x200.png",
+          "frontend/public/assets/generated/dig-dug-preview.dim_300x200.png",
+          "frontend/src/pages/HomePage.tsx"
         ]
       },
       {
         "id": "REQ-5",
-        "summary": "Add preview images for the new games as static assets and render them on the Home page game cards using the existing /assets/generated/* preview image convention.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/public/assets/generated/frogger-preview.dim_300x200.png",
-          "frontend/public/assets/generated/galaga-preview.dim_300x200.png",
-          "frontend/public/assets/generated/minesweeper-preview.dim_300x200.png",
-          "frontend/src/pages/HomePage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/public/assets/generated/frogger-preview.dim_300x200.png",
-          "frontend/public/assets/generated/galaga-preview.dim_300x200.png",
-          "frontend/public/assets/generated/minesweeper-preview.dim_300x200.png",
-          "frontend/src/pages/HomePage.tsx"
-        ]
+        "summary": "If adding the six new backend score maps changes stable state shape compared to deployed versions, add/adjust backend/migration.mo so existing deployments can upgrade without trapping and existing stored scores for current games remain intact.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
       }
     ]
   },
@@ -81,27 +89,25 @@
     "backend/main.mo",
     "backend/migration.mo",
     "build-request.json",
-    "build-template/Dockerfile",
-    "build-template/LICENSE",
-    "build-template/README.md",
-    "build-template/deploy.sh",
-    "build-template/icp.yaml",
-    "build-template/src/backend/canister.yaml",
-    "build-template/src/frontend/canister.yaml",
     "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/frogger-preview.dim_300x200.png",
-    "frontend/public/assets/generated/galaga-preview.dim_300x200.png",
-    "frontend/public/assets/generated/minesweeper-preview.dim_300x200.png",
+    "frontend/public/assets/generated/bubble-shooter-preview.dim_300x200.png",
+    "frontend/public/assets/generated/centipede-preview.dim_300x200.png",
+    "frontend/public/assets/generated/dig-dug-preview.dim_300x200.png",
+    "frontend/public/assets/generated/missile-command-preview.dim_300x200.png",
+    "frontend/public/assets/generated/pinball-preview.dim_300x200.png",
+    "frontend/public/assets/generated/qbert-preview.dim_300x200.png",
     "frontend/src/App.tsx",
-    "frontend/src/hooks/useInternetIdentity.ts",
-    "frontend/src/pages/FroggerGame.tsx",
-    "frontend/src/pages/GalagaGame.tsx",
+    "frontend/src/pages/BubbleShooterGame.tsx",
+    "frontend/src/pages/CentipedeGame.tsx",
+    "frontend/src/pages/DigDugGame.tsx",
     "frontend/src/pages/HomePage.tsx",
     "frontend/src/pages/LeaderboardPage.tsx",
-    "frontend/src/pages/MinesweeperGame.tsx",
+    "frontend/src/pages/MissileCommandGame.tsx",
+    "frontend/src/pages/PinballGame.tsx",
+    "frontend/src/pages/QbertGame.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

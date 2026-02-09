@@ -21,6 +21,12 @@ export default function HomePage() {
     Frogger: '/frogger',
     Galaga: '/galaga',
     Minesweeper: '/minesweeper',
+    Centipede: '/centipede',
+    'Missile Command': '/missile-command',
+    Pinball: '/pinball',
+    'Bubble Shooter': '/bubble-shooter',
+    'Q*bert': '/qbert',
+    'Dig Dug': '/dig-dug',
   };
 
   const gameImages: Record<string, string> = {
@@ -36,6 +42,12 @@ export default function HomePage() {
     Frogger: '/assets/generated/frogger-preview.dim_300x200.png',
     Galaga: '/assets/generated/galaga-preview.dim_300x200.png',
     Minesweeper: '/assets/generated/minesweeper-preview.dim_300x200.png',
+    Centipede: '/assets/generated/centipede-preview.dim_300x200.png',
+    'Missile Command': '/assets/generated/missile-command-preview.dim_300x200.png',
+    Pinball: '/assets/generated/pinball-preview.dim_300x200.png',
+    'Bubble Shooter': '/assets/generated/bubble-shooter-preview.dim_300x200.png',
+    'Q*bert': '/assets/generated/qbert-preview.dim_300x200.png',
+    'Dig Dug': '/assets/generated/dig-dug-preview.dim_300x200.png',
   };
 
   return (
@@ -64,7 +76,7 @@ export default function HomePage() {
         <h3 className="text-2xl font-bold pixel-font mb-6 text-center">SELECT YOUR GAME</h3>
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map((i) => (
               <Card key={i} className="border-2 border-primary/20">
                 <CardHeader className="h-48 bg-muted animate-pulse" />
                 <CardContent className="p-6">

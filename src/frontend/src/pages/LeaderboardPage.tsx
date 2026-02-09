@@ -20,6 +20,12 @@ const GAME_ROUTES: Record<string, string> = {
   'Frogger': '/frogger',
   'Galaga': '/galaga',
   'Minesweeper': '/minesweeper',
+  'Centipede': '/centipede',
+  'Missile Command': '/missile-command',
+  'Pinball': '/pinball',
+  'Bubble Shooter': '/bubble-shooter',
+  'Q*bert': '/qbert',
+  'Dig Dug': '/dig-dug',
 };
 
 export default function LeaderboardPage() {
@@ -48,6 +54,8 @@ export default function LeaderboardPage() {
       'Space Invaders': 'Space',
       'Donkey Kong': 'DK',
       'Rolling Balls': 'Balls',
+      'Missile Command': 'Missile',
+      'Bubble Shooter': 'Bubble',
     };
     return shortNames[name] || name;
   };

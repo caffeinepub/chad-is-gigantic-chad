@@ -38,6 +38,14 @@ actor {
   let galagaScores = Map.empty<Text, Nat>();
   let minesweeperScores = Map.empty<Text, Nat>();
 
+  // Add missing persistent maps.
+  let centipedeScores = Map.empty<Text, Nat>();
+  let missileCommandScores = Map.empty<Text, Nat>();
+  let pinballScores = Map.empty<Text, Nat>();
+  let bubbleShooterScores = Map.empty<Text, Nat>();
+  let qbertScores = Map.empty<Text, Nat>();
+  let digDugScores = Map.empty<Text, Nat>();
+
   type Game = {
     name : Text;
     description : Text;
@@ -105,6 +113,36 @@ actor {
       description = "Puzzle game challenging players to clear a grid without triggering hidden mines.";
       thumbnail = "assets/minesweeper.png";
     },
+    {
+      name = "Centipede";
+      description = "Shoot and eliminate segments of a centipede advancing through a field of mushrooms.";
+      thumbnail = "assets/centipede.png";
+    },
+    {
+      name = "Missile Command";
+      description = "Defend your bases from incoming missiles by shooting them down before they hit.";
+      thumbnail = "assets/missile_command.png";
+    },
+    {
+      name = "Pinball";
+      description = "Test your reflexes and score points by keeping a ball in play using flippers.";
+      thumbnail = "assets/pinball.png";
+    },
+    {
+      name = "Bubble Shooter";
+      description = "Clear the board by shooting and matching bubbles of the same color.";
+      thumbnail = "assets/bubble_shooter.png";
+    },
+    {
+      name = "Q*bert";
+      description = "Navigate a pyramid and change the color of cubes while avoiding obstacles.";
+      thumbnail = "assets/qbert.png";
+    },
+    {
+      name = "Dig Dug";
+      description = "Dig tunnels, defeat enemies and earn points in this classic arcade game.";
+      thumbnail = "assets/dig_dug.png";
+    },
   ];
 
   public query ({ caller }) func getAvailableGames() : async [Game] {
@@ -153,6 +191,12 @@ actor {
       case ("Frogger") { froggerScores };
       case ("Galaga") { galagaScores };
       case ("Minesweeper") { minesweeperScores };
+      case ("Centipede") { centipedeScores };
+      case ("Missile Command") { missileCommandScores };
+      case ("Pinball") { pinballScores };
+      case ("Bubble Shooter") { bubbleShooterScores };
+      case ("Q*bert") { qbertScores };
+      case ("Dig Dug") { digDugScores };
       case (_) { Map.empty<Text, Nat>() };
     };
   };

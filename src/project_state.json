@@ -1,41 +1,33 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "New project",
+  "summary": "App/project involves a game list; user wants to extend it with more classic games.",
   "architectural_notes": [],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Retro pixel-art Frogger scene preview (frogger-preview.dim_300x200.png)\n- Retro pixel-art Galaga space shooter preview (galaga-preview.dim_300x200.png)\n- Retro pixel-art Minesweeper grid preview (minesweeper-preview.dim_300x200.png)",
+  "imageRequirements": "## Required Images\n- Retro pixel-art Centipede scene preview (centipede-preview.dim_300x200.png)\n- Retro pixel-art Missile Command defense scene preview (missile-command-preview.dim_300x200.png)\n- Retro pixel-art Pinball table scene preview (pinball-preview.dim_300x200.png)\n- Retro pixel-art Bubble Shooter scene preview (bubble-shooter-preview.dim_300x200.png)\n- Retro pixel-art Q*bert isometric pyramid scene preview (qbert-preview.dim_300x200.png)\n- Retro pixel-art Dig Dug underground digging scene preview (dig-dug-preview.dim_300x200.png)",
   "existing_features": [
     {
-      "id": "feature-add-three-additional-classic-games-to-the-app-frogger-galaga-and-minesweeper-each-with-a-dedicated-playable-game-page-implemented-in-react-typescript-and-consistent-ui-ux-patterns-header-back-button-score-panel-how-to-play-panel-pause-reset-controls-where-applicable-and-end-of-game-score-submission-dialog",
-      "title": "Add three additional classic games to the app: Frogger, Galaga, and Minesweeper, each with a dedicated playable game page implemented in React/TypeScript and consistent UI/UX patterns (header back button, score panel, how-to-play panel, pause/reset controls where applicable, and end-of-game score submission dialog).",
+      "id": "feature-add-six-additional-classic-games-to-the-arcade-each-with-a-dedicated-playable-react-typescript-game-page-that-matches-the-existing-ui-ux-patterns-used-by-current-games-header-back-button-score-panel-how-to-play-panel-pause-reset-controls-where-applicable-and-an-end-of-game-score-submission-dialog-that-submits-scores-to-the-backend-the-six-games-to-add-are-centipede-missile-command-pinball-bubble-shooter-q-bert-and-dig-dug",
+      "title": "Add six additional classic games to the arcade, each with a dedicated playable React/TypeScript game page that matches the existing UI/UX patterns used by current games (header back button, score panel, how-to-play panel, pause/reset controls where applicable, and an end-of-game score submission dialog that submits scores to the backend). The six games to add are: Centipede, Missile Command, Pinball, Bubble Shooter, Q*bert, and Dig Dug.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-update-the-frontend-routing-and-navigation-wiring-so-the-new-game-pages-are-reachable-from-the-home-game-grid-and-from-the-leaderboard-page-including-deep-linking-to-the-leaderboard-with-a-selected-game",
-      "title": "Update the frontend routing and navigation wiring so the new game pages are reachable from the home game grid and from the leaderboard page (including deep-linking to the leaderboard with a selected game).",
+      "id": "feature-update-frontend-routing-and-navigation-so-the-six-new-games-are-reachable-from-the-app-add-routes-in-frontend-src-app-tsx-add-home-page-card-navigation-mappings-route-preview-image-mappings-in-frontend-src-pages-homepage-tsx-and-update-leaderboard-navigation-mapping-in-frontend-src-pages-leaderboardpage-tsx-so-the-play-game-name-button-works-for-all-available-games-including-the-six-newly-added-games",
+      "title": "Update frontend routing and navigation so the six new games are reachable from the app: add routes in frontend/src/App.tsx, add Home page card navigation mappings (route + preview image mappings) in frontend/src/pages/HomePage.tsx, and update Leaderboard navigation mapping in frontend/src/pages/LeaderboardPage.tsx so the \"Play {game.name}\" button works for all available games including the six newly-added games.",
       "reqIds": [
         "REQ-3"
       ],
       "version": 1
     },
     {
-      "id": "feature-make-the-leaderboard-game-list-derive-from-the-backend-s-available-games-getavailablegames-instead-of-a-hard-coded-constant-so-newly-added-games-automatically-appear-as-tabs-without-additional-code-changes",
-      "title": "Make the Leaderboard game list derive from the backend’s available games (getAvailableGames) instead of a hard-coded constant, so newly added games automatically appear as tabs without additional code changes.",
+      "id": "feature-add-static-preview-images-for-the-six-new-games-under-frontend-public-assets-generated-using-the-existing-preview-image-convention-and-render-them-on-the-home-page-game-cards-via-the-existing-gameimages-mapping",
+      "title": "Add static preview images for the six new games under frontend/public/assets/generated using the existing preview image convention, and render them on the Home page game cards via the existing gameImages mapping.",
       "reqIds": [
         "REQ-4"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-preview-images-for-the-new-games-as-static-assets-and-render-them-on-the-home-page-game-cards-using-the-existing-assets-generated-preview-image-convention",
-      "title": "Add preview images for the new games as static assets and render them on the Home page game cards using the existing /assets/generated/* preview image convention.",
-      "reqIds": [
-        "REQ-5"
       ],
       "version": 1
     }
@@ -43,20 +35,28 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Add more classic games to the app",
+      "summary": "Add 6 more games to the app, specifically classic games",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-3",
-      "summary": "Extend the Motoko backend to recognize the new games (Frogger, Galaga, Minesweeper) in getAvailableGames() and to store/retrieve high scores for each via getHighScores(), getPlayerScore(), and submitScore() without trapping for these games.",
+      "summary": "Extend the Motoko backend (single actor in backend/main.mo) to recognize the six new games (Centipede, Missile Command, Pinball, Bubble Shooter, Q*bert, Dig Dug) in getAvailableGames(), and to store/retrieve high scores for each via getHighScores(), getPlayerScore(), and submitScore() without trapping or returning an empty non-persistent map for these game names.",
       "reqIds": [
         "REQ-2"
       ],
       "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "If adding the six new backend score maps changes stable state shape compared to deployed versions, add/adjust backend/migration.mo so existing deployments can upgrade without trapping and existing stored scores for current games remain intact.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "status": "pending"
     }
   ],
-  "projectName": "Add more classic games to Retro Arcade",
+  "projectName": "Add 6 additional classic games to Retro Arcade",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

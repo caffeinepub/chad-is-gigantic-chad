@@ -1,117 +1,118 @@
 {
   "kind": "build_request",
-  "title": "Add more classic games to Retro Arcade",
+  "title": "Add 6 additional classic games to Retro Arcade",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Add three additional classic games to the app: Frogger, Galaga, and Minesweeper, each with a dedicated playable game page implemented in React/TypeScript and consistent UI/UX patterns (header back button, score panel, how-to-play panel, pause/reset controls where applicable, and end-of-game score submission dialog).",
+      "text": "Add six additional classic games to the arcade, each with a dedicated playable React/TypeScript game page that matches the existing UI/UX patterns used by current games (header back button, score panel, how-to-play panel, pause/reset controls where applicable, and an end-of-game score submission dialog that submits scores to the backend). The six games to add are: Centipede, Missile Command, Pinball, Bubble Shooter, Q*bert, and Dig Dug.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-14"
+          "msg-1"
         ],
         "quotes": [
-          "Can you add more classic games"
+          "Caffe can you add 6 more games and can you make them classic games pleas"
         ]
       },
       "acceptanceCriteria": [
-        "There are new routes/pages for Frogger, Galaga, and Minesweeper that render and run without runtime errors.",
-        "Each new game has a scoring system and triggers a game-over (or win/lose) state that opens a name-entry dialog to submit the score.",
-        "Submitting a score uses the existing score submission flow (React Query mutation) and shows success/error toast feedback consistent with existing games.",
-        "All user-facing text on the new pages is in English."
+        "There are 6 new routes (one per new game) that render a playable game (not a placeholder screen).",
+        "Each new game page displays: Back to Games navigation, a visible score display, a How to Play section, and controls consistent with existing games (Start/Pause/Reset where applicable).",
+        "Each new game triggers a game-over (or equivalent end-of-run) state and shows a score submission dialog that calls the existing score submission flow.",
+        "User-facing text on the new pages is in English."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Extend the Motoko backend to recognize the new games (Frogger, Galaga, Minesweeper) in getAvailableGames() and to store/retrieve high scores for each via getHighScores(), getPlayerScore(), and submitScore() without trapping for these games.",
+      "text": "Extend the Motoko backend (single actor in backend/main.mo) to recognize the six new games (Centipede, Missile Command, Pinball, Bubble Shooter, Q*bert, Dig Dug) in getAvailableGames(), and to store/retrieve high scores for each via getHighScores(), getPlayerScore(), and submitScore() without trapping or returning an empty non-persistent map for these game names.",
       "target": "backend",
       "source": {
         "messageIds": [
-          "msg-14"
+          "msg-1"
         ],
         "quotes": [
-          "Can you add more classic games"
+          "add 6 more games",
+          "make them classic games"
         ]
       },
       "acceptanceCriteria": [
-        "backend/main.mo includes the three new games in the available games list with name/description/thumbnail fields.",
-        "backend/main.mo has per-game score maps and getGameScores() cases for Frogger, Galaga, and Minesweeper.",
-        "Calling getHighScores('Frogger'|'Galaga'|'Minesweeper') returns an array and does not trap.",
-        "Submitting a score for each new game persists the player’s best score (only replaces when the new score is higher), consistent with existing behavior."
+        "backend/main.mo getAvailableGames() includes 6 new entries with name, description (English), and thumbnail fields for the new games.",
+        "backend/main.mo getGameScores() returns a dedicated persistent score map for each of the 6 new game names (no fall-through to the default empty map case for these names).",
+        "Submitting and retrieving scores works for each new game (scores appear in descending order in getHighScores)."
       ]
     },
     {
       "id": "REQ-3",
-      "text": "Update the frontend routing and navigation wiring so the new game pages are reachable from the home game grid and from the leaderboard page (including deep-linking to the leaderboard with a selected game).",
+      "text": "Update frontend routing and navigation so the six new games are reachable from the app: add routes in frontend/src/App.tsx, add Home page card navigation mappings (route + preview image mappings) in frontend/src/pages/HomePage.tsx, and update Leaderboard navigation mapping in frontend/src/pages/LeaderboardPage.tsx so the \"Play {game.name}\" button works for all available games including the six newly-added games.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-14"
+          "msg-1"
         ],
         "quotes": [
-          "Can you add more classic games"
+          "add 6 more games"
         ]
       },
       "acceptanceCriteria": [
-        "frontend/src/App.tsx includes routes for Frogger, Galaga, and Minesweeper.",
-        "frontend/src/pages/HomePage.tsx includes route mappings for Frogger, Galaga, and Minesweeper so 'Play Now' navigates correctly.",
-        "frontend/src/pages/LeaderboardPage.tsx allows selecting Frogger, Galaga, and Minesweeper and the 'Play {game}' button navigates to the correct route.",
-        "Leaderboard deep-linking via /leaderboard?game=<GameName> works for the new games."
+        "Home page shows 6 additional game cards returned by getAvailableGames(), and the Play Now button navigates to the correct new game route for each new game.",
+        "/leaderboard loads tabs from backend getAvailableGames() (existing behavior) and the \"Play {game.name}\" button navigates correctly for each of the six new games.",
+        "All new routes render without runtime errors (no undefined route/image lookups for the new game names)."
       ]
     },
     {
       "id": "REQ-4",
-      "text": "Make the Leaderboard game list derive from the backend’s available games (getAvailableGames) instead of a hard-coded constant, so newly added games automatically appear as tabs without additional code changes.",
+      "text": "Add static preview images for the six new games under frontend/public/assets/generated using the existing preview image convention, and render them on the Home page game cards via the existing gameImages mapping.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-14"
+          "msg-1"
         ],
         "quotes": [
-          "Can you add more classic games"
+          "add 6 more games"
         ]
       },
       "acceptanceCriteria": [
-        "Leaderboard tabs are generated from the fetched available games list.",
-        "If the backend returns additional games in the future, they automatically show up as leaderboard tabs.",
-        "When switching tabs, the leaderboard fetches and displays the top scores for that selected game (still capped to top 10 by the existing query logic)."
+        "Six new preview image files exist under frontend/public/assets/generated with the exact filenames specified in imageRequirements.required.",
+        "Home page cards for the six new games render these preview images (no broken image icons)."
       ]
     },
     {
       "id": "REQ-5",
-      "text": "Add preview images for the new games as static assets and render them on the Home page game cards using the existing /assets/generated/* preview image convention.",
-      "target": "frontend",
+      "text": "If adding the six new backend score maps changes stable state shape compared to deployed versions, add/adjust backend/migration.mo so existing deployments can upgrade without trapping and existing stored scores for current games remain intact.",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-14"
+          "msg-1"
         ],
         "quotes": [
-          "Can you add more classic games"
+          "add 6 more games"
         ]
       },
       "acceptanceCriteria": [
-        "New preview images exist under frontend/public/assets/generated with the required filenames.",
-        "Home page game cards for Frogger, Galaga, and Minesweeper display the correct preview image and do not render broken images.",
-        "No preview images are served from or routed through the backend."
+        "Upgrade path does not trap when deploying the updated canister over an existing one.",
+        "Existing game scores (for already-supported games) remain accessible after upgrade.",
+        "New games have initialized score storage after upgrade (empty leaderboards are allowed)."
       ]
     }
   ],
   "constraints": [
-    "Backend must remain a single Motoko actor in backend/main.mo; only add backend/migration.mo if an upgrade-safe state migration is strictly required.",
-    "Do not edit files under frontend/src/components/ui or any other frontend immutable paths listed in SYSTEM_CONTEXT; compose existing UI components instead.",
-    "Use English for all user-facing strings added/changed by this request."
+    "Backend must remain a single-actor Motoko canister (all logic in backend/main.mo).",
+    "Do not edit frontend immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui (compose existing components instead).",
+    "Use English for any user-facing text."
   ],
   "nonGoals": [
-    "Adding multiplayer, real-time gameplay, or chat features.",
+    "Adding multiplayer or real-time gameplay.",
     "Adding third-party authentication providers (only Internet Identity is supported).",
-    "Adding external databases or external backend services."
+    "Introducing external databases or non-Motoko backend services."
   ],
   "imageRequirements": {
     "required": [
-      "Retro pixel-art Frogger scene preview (frogger-preview.dim_300x200.png)",
-      "Retro pixel-art Galaga space shooter preview (galaga-preview.dim_300x200.png)",
-      "Retro pixel-art Minesweeper grid preview (minesweeper-preview.dim_300x200.png)"
+      "Retro pixel-art Centipede scene preview (centipede-preview.dim_300x200.png)",
+      "Retro pixel-art Missile Command defense scene preview (missile-command-preview.dim_300x200.png)",
+      "Retro pixel-art Pinball table scene preview (pinball-preview.dim_300x200.png)",
+      "Retro pixel-art Bubble Shooter scene preview (bubble-shooter-preview.dim_300x200.png)",
+      "Retro pixel-art Q*bert isometric pyramid scene preview (qbert-preview.dim_300x200.png)",
+      "Retro pixel-art Dig Dug underground digging scene preview (dig-dug-preview.dim_300x200.png)"
     ],
     "edits": []
   },

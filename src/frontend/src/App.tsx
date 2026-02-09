@@ -14,6 +14,12 @@ import RollingBallsGame from './pages/RollingBallsGame';
 import FroggerGame from './pages/FroggerGame';
 import GalagaGame from './pages/GalagaGame';
 import MinesweeperGame from './pages/MinesweeperGame';
+import CentipedeGame from './pages/CentipedeGame';
+import MissileCommandGame from './pages/MissileCommandGame';
+import PinballGame from './pages/PinballGame';
+import BubbleShooterGame from './pages/BubbleShooterGame';
+import QbertGame from './pages/QbertGame';
+import DigDugGame from './pages/DigDugGame';
 import LeaderboardPage from './pages/LeaderboardPage';
 import Layout from './components/Layout';
 
@@ -99,6 +105,42 @@ const minesweeperRoute = createRoute({
   component: MinesweeperGame,
 });
 
+const centipedeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/centipede',
+  component: CentipedeGame,
+});
+
+const missileCommandRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/missile-command',
+  component: MissileCommandGame,
+});
+
+const pinballRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/pinball',
+  component: PinballGame,
+});
+
+const bubbleShooterRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/bubble-shooter',
+  component: BubbleShooterGame,
+});
+
+const qbertRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/qbert',
+  component: QbertGame,
+});
+
+const digDugRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/dig-dug',
+  component: DigDugGame,
+});
+
 const leaderboardRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/leaderboard',
@@ -119,6 +161,12 @@ const routeTree = rootRoute.addChildren([
   froggerRoute,
   galagaRoute,
   minesweeperRoute,
+  centipedeRoute,
+  missileCommandRoute,
+  pinballRoute,
+  bubbleShooterRoute,
+  qbertRoute,
+  digDugRoute,
   leaderboardRoute,
 ]);
 

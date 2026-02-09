@@ -2,12 +2,15 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-three-additional-classic-games-to-the-app-frogger-galaga-and-minesweeper-each-with-a-dedicated-playable-game-page-implemented-in-react-typescript-and-consistent-ui-ux-patterns-header-back-button-score-panel-how-to-play-panel-pause-reset-controls-where-applicable-and-end-of-game-score-submission-dialog",
-      "featureTitle": "Add three additional classic games to the app: Frogger, Galaga, and Minesweeper, each with a dedicated playable game page implemented in React/TypeScript and consistent UI/UX patterns (header back button, score panel, how-to-play panel, pause/reset controls where applicable, and end-of-game score submission dialog).",
+      "featureId": "feature-add-six-additional-classic-games-to-the-arcade-each-with-a-dedicated-playable-react-typescript-game-page-that-matches-the-existing-ui-ux-patterns-used-by-current-games-header-back-button-score-panel-how-to-play-panel-pause-reset-controls-where-applicable-and-an-end-of-game-score-submission-dialog-that-submits-scores-to-the-backend-the-six-games-to-add-are-centipede-missile-command-pinball-bubble-shooter-q-bert-and-dig-dug",
+      "featureTitle": "Add six additional classic games to the arcade, each with a dedicated playable React/TypeScript game page that matches the existing UI/UX patterns used by current games (header back button, score panel, how-to-play panel, pause/reset controls where applicable, and an end-of-game score submission dialog that submits scores to the backend). The six games to add are: Centipede, Missile Command, Pinball, Bubble Shooter, Q*bert, and Dig Dug.",
       "files": [
-        "frontend/src/pages/FroggerGame.tsx",
-        "frontend/src/pages/GalagaGame.tsx",
-        "frontend/src/pages/MinesweeperGame.tsx"
+        "frontend/src/pages/BubbleShooterGame.tsx",
+        "frontend/src/pages/CentipedeGame.tsx",
+        "frontend/src/pages/DigDugGame.tsx",
+        "frontend/src/pages/MissileCommandGame.tsx",
+        "frontend/src/pages/PinballGame.tsx",
+        "frontend/src/pages/QbertGame.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -22,8 +25,8 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-frontend-routing-and-navigation-wiring-so-the-new-game-pages-are-reachable-from-the-home-game-grid-and-from-the-leaderboard-page-including-deep-linking-to-the-leaderboard-with-a-selected-game",
-      "featureTitle": "Update the frontend routing and navigation wiring so the new game pages are reachable from the home game grid and from the leaderboard page (including deep-linking to the leaderboard with a selected game).",
+      "featureId": "feature-update-frontend-routing-and-navigation-so-the-six-new-games-are-reachable-from-the-app-add-routes-in-frontend-src-app-tsx-add-home-page-card-navigation-mappings-route-preview-image-mappings-in-frontend-src-pages-homepage-tsx-and-update-leaderboard-navigation-mapping-in-frontend-src-pages-leaderboardpage-tsx-so-the-play-game-name-button-works-for-all-available-games-including-the-six-newly-added-games",
+      "featureTitle": "Update frontend routing and navigation so the six new games are reachable from the app: add routes in frontend/src/App.tsx, add Home page card navigation mappings (route + preview image mappings) in frontend/src/pages/HomePage.tsx, and update Leaderboard navigation mapping in frontend/src/pages/LeaderboardPage.tsx so the \"Play {game.name}\" button works for all available games including the six newly-added games.",
       "files": [
         "frontend/src/App.tsx",
         "frontend/src/pages/HomePage.tsx",
@@ -42,26 +45,8 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-make-the-leaderboard-game-list-derive-from-the-backend-s-available-games-getavailablegames-instead-of-a-hard-coded-constant-so-newly-added-games-automatically-appear-as-tabs-without-additional-code-changes",
-      "featureTitle": "Make the Leaderboard game list derive from the backend’s available games (getAvailableGames) instead of a hard-coded constant, so newly added games automatically appear as tabs without additional code changes.",
-      "files": [
-        "frontend/src/pages/LeaderboardPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-4"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-preview-images-for-the-new-games-as-static-assets-and-render-them-on-the-home-page-game-cards-using-the-existing-assets-generated-preview-image-convention",
-      "featureTitle": "Add preview images for the new games as static assets and render them on the Home page game cards using the existing /assets/generated/* preview image convention.",
+      "featureId": "feature-add-static-preview-images-for-the-six-new-games-under-frontend-public-assets-generated-using-the-existing-preview-image-convention-and-render-them-on-the-home-page-game-cards-via-the-existing-gameimages-mapping",
+      "featureTitle": "Add static preview images for the six new games under frontend/public/assets/generated using the existing preview image convention, and render them on the Home page game cards via the existing gameImages mapping.",
       "files": [
         "frontend/src/pages/HomePage.tsx"
       ],
@@ -73,7 +58,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-5"
+        "REQ-4"
       ],
       "confidence": "high"
     }

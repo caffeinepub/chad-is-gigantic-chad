@@ -1,106 +1,118 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Retro Arcade: Add Frogger, Galaga, and Minesweeper with routing, leaderboard integration, and previews",
+  "title": "Add 6 additional classic games to Retro Arcade (frontend)",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Implement three new classic game pages (Frogger, Galaga, Minesweeper) with consistent UI/UX patterns and score submission dialog using the existing React Query mutation flow.",
+      "summary": "Implement six new playable game pages (Centipede, Missile Command, Pinball, Bubble Shooter, Q*bert, Dig Dug) following existing UI/UX patterns and score submission flow.",
       "acceptanceCriteria": [
-        "There are new routes/pages for Frogger, Galaga, and Minesweeper that render and run without runtime errors.",
-        "Each new game has a scoring system and triggers a game-over (or win/lose) state that opens a name-entry dialog to submit the score.",
-        "Submitting a score uses the existing score submission flow (React Query mutation) and shows success/error toast feedback consistent with existing games.",
-        "All user-facing text on the new pages is in English."
+        "There are 6 new routes (one per new game) that render a playable game (not a placeholder screen).",
+        "Each new game page displays: Back to Games navigation, a visible score display, a How to Play section, and controls consistent with existing games (Start/Pause/Reset where applicable).",
+        "Each new game triggers a game-over (or equivalent end-of-run) state and shows a score submission dialog that calls the existing score submission flow.",
+        "User-facing text on the new pages is in English."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/FroggerGame.tsx",
+          "path": "frontend/src/pages/CentipedeGame.tsx",
           "operation": "create",
-          "description": "Create a dedicated Frogger playable page (React/TypeScript) following existing game-page UI patterns: header back button, score panel, how-to-play panel, pause/reset controls where applicable, and an end-of-game score submission dialog using useSubmitScore with sonner toast feedback. Use existing shadcn/ui components (Card, Button, Dialog, Input, Label) to match the app’s UI. Verify the component's usage instructions before implementing."
+          "description": "Create a dedicated playable Centipede React/TypeScript game page matching existing game page structure (Back button, main play area, SCORE card, HOW TO PLAY card, Start/Pause/Reset where applicable) and implement end-of-run state that opens a shadcn-ui Dialog for score submission using useSubmitScore(). Use shadcn-ui components (Card/Button/Dialog/Input/Label) to match existing UI. Verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/pages/GalagaGame.tsx",
+          "path": "frontend/src/pages/MissileCommandGame.tsx",
           "operation": "create",
-          "description": "Create a dedicated Galaga playable page (React/TypeScript) following existing game-page UI patterns: header back button, score panel, how-to-play panel, pause/reset controls where applicable, and an end-of-game score submission dialog using useSubmitScore with sonner toast feedback. Use existing shadcn/ui components (Card, Button, Dialog, Input, Label) to match the app’s UI. Verify the component's usage instructions before implementing."
+          "description": "Create a dedicated playable Missile Command React/TypeScript game page matching existing game page structure and controls, with a game-over state that opens a shadcn-ui Dialog and submits score via useSubmitScore() using game name 'Missile Command'. Use shadcn-ui components to match existing UI. Verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/pages/MinesweeperGame.tsx",
+          "path": "frontend/src/pages/PinballGame.tsx",
           "operation": "create",
-          "description": "Create a dedicated Minesweeper playable page (React/TypeScript) following existing game-page UI patterns: header back button, score panel, how-to-play panel, pause/reset controls where applicable, and an end-of-game (win/lose) score submission dialog using useSubmitScore with sonner toast feedback. Use existing shadcn/ui components (Card, Button, Dialog, Input, Label) to match the app’s UI. Verify the component's usage instructions before implementing."
+          "description": "Create a dedicated playable Pinball React/TypeScript game page matching existing game page patterns (Back button, score panel, how-to-play panel, controls as applicable). Implement a run/end condition (e.g., balls/lives exhausted) that shows a shadcn-ui Dialog to submit the final score via useSubmitScore() using game name 'Pinball'. Use shadcn-ui components to match existing UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/BubbleShooterGame.tsx",
+          "operation": "create",
+          "description": "Create a dedicated playable Bubble Shooter React/TypeScript game page matching existing game page patterns and include Start/Pause/Reset where applicable. Implement end-of-run conditions (e.g., bubbles reach a limit or cleared) that triggers a shadcn-ui Dialog and submits score via useSubmitScore() using game name 'Bubble Shooter'. Use shadcn-ui components to match existing UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/QbertGame.tsx",
+          "operation": "create",
+          "description": "Create a dedicated playable Q*bert React/TypeScript game page matching existing UI/UX patterns, with visible scoring and controls, and an end-of-run state that opens a shadcn-ui Dialog to submit score via useSubmitScore() using game name 'Q*bert'. Use shadcn-ui components to match existing UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/DigDugGame.tsx",
+          "operation": "create",
+          "description": "Create a dedicated playable Dig Dug React/TypeScript game page matching existing UI/UX patterns, with visible scoring and controls, and a game-over/end-of-run state that opens a shadcn-ui Dialog to submit score via useSubmitScore() using game name 'Dig Dug'. Use shadcn-ui components to match existing UI. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
       "id": "REQ-3",
-      "summary": "Wire new game pages into routing and navigation so Frogger, Galaga, and Minesweeper are reachable from the Home game grid and from the Leaderboard page, including leaderboard deep-linking with a selected game.",
+      "summary": "Wire the six new games into routing and navigation (App routes, Home card mappings, Leaderboard Play button mapping).",
       "acceptanceCriteria": [
-        "frontend/src/App.tsx includes routes for Frogger, Galaga, and Minesweeper.",
-        "frontend/src/pages/HomePage.tsx includes route mappings for Frogger, Galaga, and Minesweeper so 'Play Now' navigates correctly.",
-        "frontend/src/pages/LeaderboardPage.tsx allows selecting Frogger, Galaga, and Minesweeper and the 'Play {game}' button navigates to the correct route.",
-        "Leaderboard deep-linking via /leaderboard?game=<GameName> works for the new games."
+        "Home page shows 6 additional game cards returned by getAvailableGames(), and the Play Now button navigates to the correct new game route for each new game.",
+        "/leaderboard loads tabs from backend getAvailableGames() (existing behavior) and the \"Play {game.name}\" button navigates correctly for each of the six new games.",
+        "All new routes render without runtime errors (no undefined route/image lookups for the new game names)."
       ],
       "file_operations": [
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Register new routes for Frogger, Galaga, and Minesweeper and wire them into the existing TanStack Router route tree so the pages are navigable."
+          "description": "Add imports and TanStack Router routes for the 6 new game pages (Centipede, Missile Command, Pinball, Bubble Shooter, Q*bert, Dig Dug) and register them in the routeTree so navigation to each new game path renders without runtime errors."
         },
         {
           "path": "frontend/src/pages/HomePage.tsx",
           "operation": "modify",
-          "description": "Extend the Home page route mapping to include Frogger, Galaga, and Minesweeper so each new game card’s 'Play Now' navigation resolves to the correct path."
+          "description": "Extend the Home page navigation mappings to include route slugs and preview image mappings for the six new game names returned by getAvailableGames() (Centipede, Missile Command, Pinball, Bubble Shooter, Q*bert, Dig Dug) so Play Now and card rendering do not hit undefined lookups. Use existing shadcn-ui Card/Button patterns already present. Verify the component's usage instructions before implementing."
         },
         {
           "path": "frontend/src/pages/LeaderboardPage.tsx",
           "operation": "modify",
-          "description": "Update leaderboard navigation wiring to support Frogger, Galaga, and Minesweeper selection and ensure the 'Play {game}' button routes correctly. Also ensure selected game can be deep-linked and synchronized via the /leaderboard?game=<GameName> search param."
+          "description": "Extend the GAME_ROUTES mapping so the \"Play {game.name}\" button navigates correctly for the six new game names (Centipede, Missile Command, Pinball, Bubble Shooter, Q*bert, Dig Dug) loaded from getAvailableGames(). Use existing shadcn-ui Tabs/Table/Button patterns. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
       "id": "REQ-4",
-      "summary": "Generate Leaderboard game tabs dynamically from the backend’s available games list instead of a hard-coded constant, keeping top-10 fetch behavior intact.",
+      "summary": "Add and render static preview images for the six new games using the existing generated asset convention and Home page mapping.",
       "acceptanceCriteria": [
-        "Leaderboard tabs are generated from the fetched available games list.",
-        "If the backend returns additional games in the future, they automatically show up as leaderboard tabs.",
-        "When switching tabs, the leaderboard fetches and displays the top scores for that selected game (still capped to top 10 by the existing query logic)."
+        "Six new preview image files exist under frontend/public/assets/generated with the exact filenames specified in imageRequirements.required.",
+        "Home page cards for the six new games render these preview images (no broken image icons)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/LeaderboardPage.tsx",
-          "operation": "modify",
-          "description": "Replace the hard-coded game list with data from useGetAvailableGames, rendering Tabs/TabsTrigger/TabsContent based on the fetched list. Keep the existing useGetHighScores(selectedGame) top-10 behavior, and keep selectedGame state synchronized with the search param for deep-linking. Use existing shadcn/ui Tabs components for the tab UI. Verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "summary": "Add static preview images for Frogger, Galaga, and Minesweeper under the generated assets convention and render them on Home page game cards.",
-      "acceptanceCriteria": [
-        "New preview images exist under frontend/public/assets/generated with the required filenames.",
-        "Home page game cards for Frogger, Galaga, and Minesweeper display the correct preview image and do not render broken images.",
-        "No preview images are served from or routed through the backend."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/generated/frogger-preview.dim_300x200.png",
+          "path": "frontend/public/assets/generated/centipede-preview.dim_300x200.png",
           "operation": "create",
-          "description": "Add the generated static preview image asset for Frogger at frontend/public/assets/generated/frogger-preview.dim_300x200.png."
+          "description": "Add the generated static preview image asset for Centipede at frontend/public/assets/generated/centipede-preview.dim_300x200.png and ensure it is referenced by the existing Home page gameImages mapping."
         },
         {
-          "path": "frontend/public/assets/generated/galaga-preview.dim_300x200.png",
+          "path": "frontend/public/assets/generated/missile-command-preview.dim_300x200.png",
           "operation": "create",
-          "description": "Add the generated static preview image asset for Galaga at frontend/public/assets/generated/galaga-preview.dim_300x200.png."
+          "description": "Add the generated static preview image asset for Missile Command at frontend/public/assets/generated/missile-command-preview.dim_300x200.png and ensure it is referenced by the existing Home page gameImages mapping."
         },
         {
-          "path": "frontend/public/assets/generated/minesweeper-preview.dim_300x200.png",
+          "path": "frontend/public/assets/generated/pinball-preview.dim_300x200.png",
           "operation": "create",
-          "description": "Add the generated static preview image asset for Minesweeper at frontend/public/assets/generated/minesweeper-preview.dim_300x200.png."
+          "description": "Add the generated static preview image asset for Pinball at frontend/public/assets/generated/pinball-preview.dim_300x200.png and ensure it is referenced by the existing Home page gameImages mapping."
+        },
+        {
+          "path": "frontend/public/assets/generated/bubble-shooter-preview.dim_300x200.png",
+          "operation": "create",
+          "description": "Add the generated static preview image asset for Bubble Shooter at frontend/public/assets/generated/bubble-shooter-preview.dim_300x200.png and ensure it is referenced by the existing Home page gameImages mapping."
+        },
+        {
+          "path": "frontend/public/assets/generated/qbert-preview.dim_300x200.png",
+          "operation": "create",
+          "description": "Add the generated static preview image asset for Q*bert at frontend/public/assets/generated/qbert-preview.dim_300x200.png and ensure it is referenced by the existing Home page gameImages mapping."
+        },
+        {
+          "path": "frontend/public/assets/generated/dig-dug-preview.dim_300x200.png",
+          "operation": "create",
+          "description": "Add the generated static preview image asset for Dig Dug at frontend/public/assets/generated/dig-dug-preview.dim_300x200.png and ensure it is referenced by the existing Home page gameImages mapping."
         },
         {
           "path": "frontend/src/pages/HomePage.tsx",
           "operation": "modify",
-          "description": "Extend the Home page gameImages mapping to include Frogger, Galaga, and Minesweeper preview images using the static asset convention paths: frontend/public/assets/generated/frogger-preview.dim_300x200.png, frontend/public/assets/generated/galaga-preview.dim_300x200.png, frontend/public/assets/generated/minesweeper-preview.dim_300x200.png."
+          "description": "Ensure the gameImages mapping includes exact references for the six new generated image files (frontend/public/assets/generated/centipede-preview.dim_300x200.png, frontend/public/assets/generated/missile-command-preview.dim_300x200.png, frontend/public/assets/generated/pinball-preview.dim_300x200.png, frontend/public/assets/generated/bubble-shooter-preview.dim_300x200.png, frontend/public/assets/generated/qbert-preview.dim_300x200.png, frontend/public/assets/generated/dig-dug-preview.dim_300x200.png) so Home game cards render without broken images. Verify the component's usage instructions before implementing."
         }
       ]
     }
